@@ -1,0 +1,10 @@
+import {Router} from "express";
+import auth from "../middleware/auth.js";
+import {listProjects,createProject,getProject,updateProject,deleteProject,addMember,removeMember} from "../controllers/projectController.js";
+const router=Router();
+router.use(auth);
+router.route("/").get(listProjects).post(createProject);
+router.route("/:id").get(getProject).put(updateProject).delete(deleteProject);
+router.post("/:id/members",addMember);
+router.delete("/:id/members/:userId",removeMember);
+export default router;
